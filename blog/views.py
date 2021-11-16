@@ -9,28 +9,24 @@ from .models import Post
 from django.contrib.auth.models import Group
 
 # Create your views here.
+
 # Home View
-
-
 def home(request):
     posts = Post.objects.all()
     return render(request, 'blog/home.html', {'posts': posts})
 
+
 # About View
-
-
 def about(request):
     return render(request, 'blog/about.html')
 
+
 # Contact View
-
-
 def contact(request):
     return render(request, 'blog/contact.html')
 
+
 # Dashboard View
-
-
 def dashboard(request):
     if request.user.is_authenticated:
         posts = Post.objects.all()
@@ -48,9 +44,8 @@ def user_logout(request):
     logout(request)
     return HttpResponseRedirect('/')
 
+
 # Signup View
-
-
 def user_signup(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
@@ -64,9 +59,8 @@ def user_signup(request):
         form = SignUpForm()
     return render(request, 'blog/signup.html', {'form': form})
 
+
 # Login View
-
-
 def user_login(request):
     if not request.user.is_authenticated:
         if request.method == 'POST':
@@ -105,9 +99,8 @@ def add_post(request):
     else:
         return HttpResponseRedirect('/login/')
 
+
 # Update Post View
-
-
 def update_post(request, id):
     if request.user.is_authenticated:
         if request.method == 'POST':
